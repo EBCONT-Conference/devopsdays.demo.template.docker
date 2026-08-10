@@ -20,12 +20,12 @@ on:
 jobs:
   build:
     name: Build
+    if: ${{ inputs.build == true }}
     permissions:
       contents: read
       packages: write
       id-token: write
     uses: EBCONT-Conference/devopsdays.demo.reusable-workflow.build.docker/.github/workflows/entrypoint.yml@v1
-    if: ${{ inputs.build == 'true' }}
     secrets: inherit
 
 #  deployment:
