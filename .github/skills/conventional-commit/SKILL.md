@@ -113,19 +113,39 @@ Rules for **footers** (optional):
 
 ---
 
-## 7. Present and confirm
+## 7. Resolve Git identity and signing
+
+Before presenting the final message, inspect the effective Git identity for the current repository:
+
+```bash
+git config --show-origin --get-regexp '^(user\.(name|email|signingkey)|commit\.gpgsign|gpg\.format)$'
+```
+
+- Use the resolved `user.name`, `user.email`, and related signing settings from the existing
+  Git config files that apply to this repository.
+- Do **not** hardcode, invent, or override the author/committer identity with `--author`,
+  `GIT_AUTHOR_*`, or `GIT_COMMITTER_*` unless the user explicitly asks.
+- For repositories under `/home/andreas/development/workspaces/99-Conferences/`, the effective
+  identity is expected to come from
+  `/home/andreas/development/workspaces/99-Conferences/.gitconfig-conference` via `includeIf`.
+- If `user.name` or `user.email` do not resolve, stop and tell the user that Git identity is not
+  configured for this repository.
+
+---
+
+## 8. Present and confirm
 
 Show the proposed commit message in a fenced code block, then ask:
 
 > Commit with this message? (yes / edit / cancel)
 
-- **yes** — proceed to step 8.
+- **yes** — proceed to step 9.
 - **edit** — ask the user for their revised message and use that instead.
 - **cancel** — stop without committing.
 
 ---
 
-## 8. Perform the commit
+## 9. Perform the commit
 
 Run:
 
@@ -138,6 +158,9 @@ Or, if the message is complex, write it to a temp file and use:
 ```bash
 git commit -F /tmp/commit_msg.txt
 ```
+
+- Let Git use the active repository config for author, committer, and signing settings.
+- If `commit.gpgsign=true` is configured, do not disable it unless the user explicitly asks.
 
 After the commit succeeds, show the output of `git log --oneline -1` to confirm.
 
