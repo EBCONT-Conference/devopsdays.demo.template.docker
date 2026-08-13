@@ -18,7 +18,7 @@ git diff --staged --stat
 ```
 
 - If **nothing is staged**, check for unstaged changes with `git status --short`.
-  - If there are unstaged changes, ask the user whether they want to stage everything
+  - If there are unstaged changes: List the unstaged changes and ask the user whether they want to stage everything
     (`git add -A`) before proceeding, or let them stage manually and retry.
   - If the working tree is clean too, respond: "Nothing to commit — working tree is clean."
     and **stop**.
