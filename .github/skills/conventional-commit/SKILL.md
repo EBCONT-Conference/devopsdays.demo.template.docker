@@ -9,7 +9,28 @@ commit.
 
 ---
 
-## 1. Check for staged changes
+## 1. Resolve Git identity and signing
+
+Before starting, inspect the effective Git identity for the current repository:
+
+```bash
+git config --show-origin --get-regexp '^(user\.(name|email|signingkey)|commit\.gpgsign|gpg\.format)$'
+```
+
+- Use the resolved `user.name`, `user.email`, and related signing settings from the existing
+  Git config files that apply to this repository.
+- Do **not** hardcode, invent, or override the author/committer identity with `--author`,
+  `GIT_AUTHOR_*`, or `GIT_COMMITTER_*` unless the user explicitly asks.
+- If `user.name` or `user.email` do not resolve, ask the user to input them and set them with:
+
+```bash
+git config user.name "<name>"
+git config user.email "<email>"
+```
+
+---
+
+## 2. Check for staged changes
 
 Run the following and capture the output:
 
@@ -26,7 +47,7 @@ git diff --staged --stat
 
 ---
 
-## 2. Inspect the diff
+## 3. Inspect the diff
 
 Run:
 
@@ -38,7 +59,7 @@ Read the full diff carefully to understand **what changed and why**.
 
 ---
 
-## 3. Determine the commit type
+## 4. Determine the commit type
 
 Choose **exactly one** type:
 
@@ -61,7 +82,7 @@ into two commits and ask the user which to do first.
 
 ---
 
-## 4. Determine the scope (optional)
+## 5. Determine the scope (optional)
 
 The scope is a short noun in parentheses describing the affected area:
 
@@ -71,7 +92,7 @@ The scope is a short noun in parentheses describing the affected area:
 
 ---
 
-## 5. Determine breaking changes
+## 6. Determine breaking changes
 
 If the diff contains any of the following, mark the commit as **breaking** by appending `!`
 after the type/scope and adding a `BREAKING CHANGE:` footer:
@@ -82,7 +103,7 @@ after the type/scope and adding a `BREAKING CHANGE:` footer:
 
 ---
 
-## 6. Write the commit message
+## 7. Write the commit message
 
 Follow this structure exactly:
 
@@ -113,22 +134,6 @@ Rules for **footers** (optional):
 
 ---
 
-## 7. Resolve Git identity and signing
-
-Before presenting the final message, inspect the effective Git identity for the current repository:
-
-```bash
-git config --show-origin --get-regexp '^(user\.(name|email|signingkey)|commit\.gpgsign|gpg\.format)$'
-```
-
-- Use the resolved `user.name`, `user.email`, and related signing settings from the existing
-  Git config files that apply to this repository.
-- Do **not** hardcode, invent, or override the author/committer identity with `--author`,
-  `GIT_AUTHOR_*`, or `GIT_COMMITTER_*` unless the user explicitly asks.
-- If `user.name` or `user.email` do not resolve, stop and tell the user that Git identity is not
-  configured for this repository.
-
----
 
 ## 8. Present and confirm
 
