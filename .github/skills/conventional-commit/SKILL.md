@@ -125,9 +125,6 @@ git config --show-origin --get-regexp '^(user\.(name|email|signingkey)|commit\.g
   Git config files that apply to this repository.
 - Do **not** hardcode, invent, or override the author/committer identity with `--author`,
   `GIT_AUTHOR_*`, or `GIT_COMMITTER_*` unless the user explicitly asks.
-- For repositories under `/home/andreas/development/workspaces/99-Conferences/`, the effective
-  identity is expected to come from
-  `/home/andreas/development/workspaces/99-Conferences/.gitconfig-conference` via `includeIf`.
 - If `user.name` or `user.email` do not resolve, stop and tell the user that Git identity is not
   configured for this repository.
 
