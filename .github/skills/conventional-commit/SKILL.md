@@ -30,7 +30,47 @@ git config user.email "<email>"
 
 ---
 
-## 2. Check for staged changes
+## 2. Check current branch
+
+Run:
+
+```bash
+git branch --show-current
+```
+
+- If the current branch is `main`, `master`, or another protected/default branch, the changes
+  **must not** be committed directly to it.
+- If there are **no staged changes yet** (nothing output by `git diff --staged --stat`):
+  - Inspect any unstaged changes with `git diff --stat` and `git status --short` to get a sense
+    of the scope and type of work.
+  - Derive a branch name following this pattern using the appropriate Conventional Commit type
+    as the prefix:
+
+    ```
+    /<type>/<short-kebab-description>
+    ```
+
+    Examples: `/docs/update-readme`, `/fix/fix-the-bug`, `/feat/added-button`
+
+  - Propose the branch name to the user and ask for confirmation before creating it:
+
+    > Create and switch to branch `<proposed-name>`? (yes / rename / cancel)
+
+  - **yes** — run `git checkout -b <branch-name>` and continue.
+  - **rename** — ask the user for their preferred branch name, then create it.
+  - **cancel** — stop without making any changes.
+- If changes **are already staged** on a protected branch, warn the user:
+
+  > ⚠️ You have staged changes directly on `<branch>`. It is recommended to move these to a
+  > feature branch before committing. Create a new branch now? (yes / no)
+
+  - **yes** — follow the same branch-naming flow above, then run
+    `git checkout -b <branch-name>` (staged changes carry over automatically).
+  - **no** — proceed at the user's own risk.
+
+---
+
+## 3. Check for staged changes
 
 Run the following and capture the output:
 
@@ -47,7 +87,7 @@ git diff --staged --stat
 
 ---
 
-## 3. Inspect the diff
+## 4. Inspect the diff
 
 Run:
 
@@ -59,7 +99,7 @@ Read the full diff carefully to understand **what changed and why**.
 
 ---
 
-## 4. Determine the commit type
+## 5. Determine the commit type
 
 Choose **exactly one** type:
 
@@ -82,7 +122,7 @@ into two commits and ask the user which to do first.
 
 ---
 
-## 5. Determine the scope (optional)
+## 6. Determine the scope (optional)
 
 The scope is a short noun in parentheses describing the affected area:
 
@@ -92,7 +132,7 @@ The scope is a short noun in parentheses describing the affected area:
 
 ---
 
-## 6. Determine breaking changes
+## 7. Determine breaking changes
 
 If the diff contains any of the following, mark the commit as **breaking** by appending `!`
 after the type/scope and adding a `BREAKING CHANGE:` footer:
@@ -103,7 +143,7 @@ after the type/scope and adding a `BREAKING CHANGE:` footer:
 
 ---
 
-## 7. Write the commit message
+## 8. Write the commit message
 
 Follow this structure exactly:
 
@@ -135,19 +175,19 @@ Rules for **footers** (optional):
 ---
 
 
-## 8. Present and confirm
+## 9. Present and confirm
 
 Show the proposed commit message in a fenced code block, then ask:
 
 > Commit with this message? (yes / edit / cancel)
 
-- **yes** — proceed to step 9.
+- **yes** — proceed to step 10.
 - **edit** — ask the user for their revised message and use that instead.
 - **cancel** — stop without committing.
 
 ---
 
-## 9. Perform the commit
+## 10. Perform the commit
 
 Run:
 
@@ -165,6 +205,17 @@ git commit -F /tmp/commit_msg.txt
 - If `commit.gpgsign=true` is configured, do not disable it unless the user explicitly asks.
 
 After the commit succeeds, show the output of `git log --oneline -1` to confirm.
+
+---
+
+## 11. Push the commit
+
+Ask the user:
+
+> Push this commit? (yes / no)
+
+- **yes** — run `git push` and show the output, then continue to step 12.
+- **no** — stop here without pushing.
 
 ---
 
