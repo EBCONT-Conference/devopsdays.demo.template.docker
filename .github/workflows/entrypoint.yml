@@ -1,4 +1,4 @@
-name: Entrypoint
+name: Entrypoint2
 
 on:
   workflow_dispatch:
