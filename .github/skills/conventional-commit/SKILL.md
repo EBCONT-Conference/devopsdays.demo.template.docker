@@ -214,7 +214,9 @@ Ask the user:
 
 > Push this commit? (yes / no)
 
-- **yes** — run `git push` and show the output, then continue to step 12.
+- **yes** — run `git push` and show the output.
+    - If the push fails due to no tracking branch, ask if the user wants to set the upstream and push with
+      `git push --set-upstream origin <branch>`, where `<branch>` is the current branch name.
 - **no** — stop here without pushing.
 
 ---
