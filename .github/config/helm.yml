@@ -1,0 +1,23 @@
+namespace: apps-devopsdays2026
+path: helm/
+environments:
+  dev:
+    triggers:
+      push:
+        branches:
+          - fix/*
+          - feat/*
+  stage:
+    triggers:
+      push:
+        branches:
+          - main
+      pull_request:
+        branches:
+          - fix/*
+          - feat/*
+  prod:
+    triggers:
+      push:
+        tags:
+          - v*
