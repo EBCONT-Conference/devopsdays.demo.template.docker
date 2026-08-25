@@ -1,4 +1,5 @@
 ---
+name: conventional-commit
 description: 'Create a git commit following the Conventional Commits specification. Use when the user runs /commit or asks to commit staged changes with a conventional message.'
 ---
 
