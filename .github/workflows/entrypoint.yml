@@ -25,9 +25,9 @@ jobs:
     uses: EBCONT-Conference/devopsdays.demo.reusable-workflow.build.docker/.github/workflows/entrypoint.yml@v1
     secrets: inherit
 
-#  deployment:
-#    name: Deployment
-#    uses: ebcont/ebcont.it-support.reusable-workflow.deployment.helm/.github/workflows/entrypoint.yml@v6
-#    if: ${{ inputs.deploy == 'true' && always() && !failure() }}
-#    needs: [ build ]
-#    secrets: inherit
+  deployment:
+    name: Deployment
+    uses: EBCONT-Conference/devopsdays.demo.reusable-workflow.deployment.helm/.github/workflows/entrypoint.yml@v1
+    if: ${{ inputs.deploy == true || github.event_name == 'push' }}
+    needs: [ build ]
+    secrets: inherit
