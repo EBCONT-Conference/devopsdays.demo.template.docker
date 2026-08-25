@@ -12,19 +12,15 @@ on:
         default: false
         description: "Run deploy"
   push:
+    paths:
+      - 'src/**'
     branches-ignore:
-      - release-please**
-    tags:
-      - v**
-
+      - 'release-please**'
+    
 jobs:
   build:
     name: Build
-    if: ${{ inputs.build == true }}
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
+    if: ${{ inputs.build == true || github.event_name == 'push' }}
     uses: EBCONT-Conference/devopsdays.demo.reusable-workflow.build.docker/.github/workflows/entrypoint.yml@v1
     secrets: inherit
 
