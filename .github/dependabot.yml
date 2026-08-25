@@ -13,10 +13,3 @@ updates:
       interval: daily
     commit-message:
       prefix: fix(deps)
-
-  - package-ecosystem: docker-compose
-    directory: /
-    schedule:
-      interval: daily
-    commit-message:
-      prefix: fix(deps)
