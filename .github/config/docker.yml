@@ -1,15 +1,10 @@
-- dockerfile: Dockerfile
-  platforms:
-    - linux/amd64
-    - linux/arm64
-  runner: ubuntu-latest
-  arguments:
-    - key: TEST_ARG
-      value: test
-    - key: ANOTHER-TEST-ARG
-      value: another-test
-- dockerfile: Dockerfile
-  suffix: test
-  secrets:
-    - name: TEST_SECRET
-      id: b3793044-a8ff-49cb-bdf5-21913fc50f06
+dockerfile: Dockerfile
+platforms:
+  - linux/amd64
+  - linux/arm64
+runner: ubuntu-latest
+arguments:
+  - key: TEST_ARG
+    value: test
+  - key: ANOTHER-TEST-ARG
+    value: another-test
