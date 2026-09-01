@@ -1,15 +1,13 @@
 # Template Docker
 
-TODO update for DEVOPSDAYS
-
 ## About
 
 This template can be used to build and potentially deploy Docker images via HELM charts
 
 ## Contacts
 
-- **Owner**: EBCONT operations
-- **Support**: [EBCONT operations](https://support-op.ebcont.com)
+- **Owner**: EBCONT Conference Team
+- **Support**: [EBCONT Conference Team](github@ebcont.com)
 
 ## Resources
 
@@ -27,7 +25,7 @@ This template ought to be used to build & deploy one or multiple Docker files. T
 
 ## Workflows
 
-- `entrypoint.yml` is the core workflow calling [a reusable workflow for building](TODO) capable of handling any Docker operations and [a reusable workflow for deploying](TODO) capable of handling any HELM operations. Please take a look there to see how these workflows can be used, how they can be configured and which requirements must be met.
+- `entrypoint.yml` is the core workflow calling [a reusable workflow for building]([TODO](https://github.com/EBCONT-Conference/devopsdays.demo.reusable-workflow.build.docker)) capable of handling any Docker operations and [a reusable workflow for deploying]([TODO](https://github.com/EBCONT-Conference/devopsdays.demo.reusable-workflow.deployment.helm)) capable of handling any HELM operations. Please take a look there to see how these workflows can be used, how they can be configured and which requirements must be met.
 
 ### Requirements & configuration
 
